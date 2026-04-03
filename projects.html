@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="manifest" href="/manifest.json">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kaizen Projects</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="nav-buttons">
+        <a href="index.html" class="nav-btn">Kaizen</a>
+        <a href="tasks.html" class="nav-btn">Tasks</a>
+        <a href="habits.html" class="nav-btn">Habits</a>
+        <a href="notes.html" class="nav-btn">Notes</a>
+        <a href="projects.html" class="nav-btn">Projects</a>
+        <a href="micro.html" class="nav-btn">Micro</a>
+      </div>
+    </nav>
+
+    <main class="page-wrapper">
+
+      <!-- TOP CONTROLS -->
+      <div class="top-controls">
+        <div class="mode-toggle">
+          <button id="simpleModeBtn" class="mode-btn">Simple Mode</button>
+          <button id="advancedModeBtn" class="mode-btn">Advanced Mode</button>
+        </div>
+
+        <div class="dark-toggle">
+          <button id="darkModeBtn" class="dark-btn">Dark Mode</button>
+        </div>
+      </div>
+
+      <!-- HEADER -->
+      <section class="page-header">
+        <h1>Projects</h1>
+        <p>Type a project name and press Enter to add it.</p>
+      </section>
+
+      <!-- PROJECT INPUT -->
+      <section class="card advanced-only">
+        <input id="projectNameInput" type="text" placeholder="New project name..." />
+      </section>
+
+      <!-- PROJECT LIST -->
+      <section class="card advanced-only">
+        <h2>Your Projects</h2>
+        <div id="projectList" class="project-list"></div>
+      </section>
+
+    </main>
+
+    <script type="module" src="src/main.js"></script>
+    <script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("/service-worker.js");
+  }
+</script>
+  </body>
+</html>

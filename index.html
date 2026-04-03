@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="manifest" href="/manifest.json">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kaizen Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="nav-buttons">
+        <a href="index.html" class="nav-btn">Kaizen</a>
+        <a href="tasks.html" class="nav-btn">Tasks</a>
+        <a href="habits.html" class="nav-btn">Habits</a>
+        <a href="notes.html" class="nav-btn">Notes</a>
+        <a href="projects.html" class="nav-btn">Projects</a>
+        <a href="micro.html" class="nav-btn">Micro</a>
+      </div>
+    </nav>
+
+    <main class="page-wrapper">
+
+      <!-- TOP CONTROLS -->
+      <div class="top-controls">
+        <div class="mode-toggle">
+          <button id="simpleModeBtn" class="mode-btn">Simple Mode</button>
+          <button id="advancedModeBtn" class="mode-btn">Advanced Mode</button>
+        </div>
+
+        <div class="dark-toggle">
+          <button id="darkModeBtn" class="dark-btn">Dark Mode</button>
+        </div>
+      </div>
+
+      <!-- HEADER -->
+      <section class="page-header">
+        <h1>Kaizen Dashboard</h1>
+        <p>Your overview of everything active.</p>
+      </section>
+
+      <!-- DAILY HIGHLIGHT -->
+      <section class="card">
+        <h2>Daily Highlight</h2>
+        <input id="highlightInput" type="text" placeholder="What's the one thing that matters today?" />
+        <p id="highlightDisplay" class="highlight-display"></p>
+      </section>
+
+      <!-- WEEKLY REPORT -->
+      <section class="card advanced-only">
+        <h2>Weekly Progress Report</h2>
+        <p>Tasks Completed: <span id="weeklyTasks">0</span></p>
+        <p>Habits Completed: <span id="weeklyHabits">0</span></p>
+        <p>Micro‑Commitments: <span id="weeklyMicro">0</span></p>
+        <p>Time Accuracy: <span id="weeklyAccuracy">0%</span></p>
+        <p>Project Progress: <span id="weeklyProjects">0%</span></p>
+      </section>
+
+      <!-- ACTIVE ITEMS -->
+      <section class="card">
+        <h2>Active Items</h2>
+
+        <div class="collapse-section">
+          <div class="collapse-header">
+            <span>Tasks (<span id="activeTasksCount">0</span>)</span>
+            <span class="arrow">▼</span>
+          </div>
+          <div class="collapse-content" id="activeTasksList"></div>
+        </div>
+
+        <div class="collapse-section">
+          <div class="collapse-header">
+            <span>Habits (<span id="activeHabitsCount">0</span>)</span>
+            <span class="arrow">▼</span>
+          </div>
+          <div class="collapse-content" id="activeHabitsList"></div>
+        </div>
+
+        <div class="collapse-section advanced-only">
+          <div class="collapse-header">
+            <span>Micro‑Commitments (<span id="activeMicroCount">0</span>)</span>
+            <span class="arrow">▼</span>
+          </div>
+          <div class="collapse-content" id="activeMicroList"></div>
+        </div>
+
+        <div class="collapse-section advanced-only">
+          <div class="collapse-header">
+            <span>Projects (<span id="activeProjectsCount">0</span>)</span>
+            <span class="arrow">▼</span>
+          </div>
+          <div class="collapse-content" id="activeProjectsList"></div>
+        </div>
+
+        <div class="collapse-section advanced-only">
+          <div class="collapse-header">
+            <span>Time Estimates (<span id="activeTimeCount">0</span>)</span>
+            <span class="arrow">▼</span>
+          </div>
+          <div class="collapse-content" id="activeTimeList"></div>
+        </div>
+      </section>
+
+    </main>
+
+    <script type="module" src="src/main.js"></script>
+    <script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("/service-worker.js");
+  }
+</script>
+  </body>
+</html>
