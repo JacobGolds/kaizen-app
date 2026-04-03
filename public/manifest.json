@@ -1,18 +1,13 @@
 {
   "name": "Kaizen Dashboard",
   "short_name": "Kaizen",
-  "start_url": "/",
+  "start_url": "/kaizen-app/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#4f46e5",
   "icons": [
     {
-      "src": "/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/icon-512.png",
+      "src": "public/icon.png",
       "sizes": "512x512",
       "type": "image/png"
     }
