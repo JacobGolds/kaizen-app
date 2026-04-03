@@ -266,3 +266,24 @@ body.dark .collapse-content {
 .delete-btn:hover {
   color: #b91c1c;
 }
+/* Fix text wrapping inside cards and headers */
+.page-header p,
+.card p,
+.card span,
+.card label {
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+}
+
+/* Fix placeholder text being cut off */
+input::placeholder {
+  white-space: normal;
+}
+/* Allow wrapping inside flex containers */
+.page-header,
+.top-controls,
+.collapse-header,
+.card {
+  flex-wrap: wrap;
+}
