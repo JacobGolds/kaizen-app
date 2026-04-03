@@ -9,20 +9,22 @@
   </head>
 
   <body class="skip-splash">
+    <!-- SPLASH SCREEN -->
     <div id="splashScreen" class="splash">
-      <img src="icon.png" class="splash-logo" />
+      <img src="/kaizen-app/icon.png" class="splash-logo" />
     </div>
+
     <!-- NAVBAR -->
     <nav class="navbar">
-  <div class="nav-buttons">
-    <a href="index.html" class="nav-btn">Home</a>
-    <a href="tasks.html" class="nav-btn">Tasks</a>
-    <a href="habits.html" class="nav-btn">Habits</a>
-    <a href="notes.html" class="nav-btn">Notes</a>
-    <a href="projects.html" class="nav-btn">Projects</a>
-    <a href="micro.html" class="nav-btn">Micro</a>
-  </div>
-</nav>
+      <div class="nav-buttons">
+        <a href="index.html" class="nav-btn">Home</a>
+        <a href="tasks.html" class="nav-btn">Tasks</a>
+        <a href="habits.html" class="nav-btn">Habits</a>
+        <a href="notes.html" class="nav-btn">Notes</a>
+        <a href="projects.html" class="nav-btn">Projects</a>
+        <a href="micro.html" class="nav-btn">Micro</a>
+      </div>
+    </nav>
 
     <main class="page-wrapper">
 
@@ -38,31 +40,34 @@
         </div>
       </div>
 
-
       <!-- HEADER -->
       <section class="page-header">
         <h1>Daily Tasks</h1>
         <p>Type a Task and press Enter to add it.</p>
       </section>
 
-      <!-- TAKS INPUT -->
+      <!-- TASK INPUT -->
       <section class="card">
-        <input id="tasksInput" type="text" placeholder="Add a task..." />
+        <input id="taskInput" type="text" placeholder="Add a task..." />
       </section>
 
       <!-- TASK LIST -->
       <section class="card">
         <h2>Your Tasks</h2>
-        <div id="taskList" class="task-list"></div>
+        <ul id="taskList" class="task-list"></ul>
       </section>
 
     </main>
 
-    <script type="module" src="src/main.js"></script>
+    <!-- SERVICE WORKER -->
     <script>
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("/service-worker.js");
-  }
-</script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("/service-worker.js");
+      }
+    </script>
+
+    <!-- MAIN JAVASCRIPT (ONLY ONE SCRIPT TAG) -->
+    <script type="module" src="/src/main.js"></script>
+
   </body>
 </html>

@@ -9,21 +9,22 @@
   </head>
 
   <body class="skip-splash">
+    <!-- SPLASH SCREEN -->
     <div id="splashScreen" class="splash">
-  <img src="icon.png" class="splash-logo" />
-</div>
+      <img src="/kaizen-app/icon.png" class="splash-logo" />
+    </div>
+
     <!-- NAVBAR -->
     <nav class="navbar">
-  <nav class="navbar">
-  <div class="nav-buttons">
-    <a href="index.html" class="nav-btn">Home</a>
-    <a href="tasks.html" class="nav-btn">Tasks</a>
-    <a href="habits.html" class="nav-btn">Habits</a>
-    <a href="notes.html" class="nav-btn">Notes</a>
-    <a href="projects.html" class="nav-btn">Projects</a>
-    <a href="micro.html" class="nav-btn">Micro</a>
-  </div>
-</nav>
+      <div class="nav-buttons">
+        <a href="index.html" class="nav-btn">Home</a>
+        <a href="tasks.html" class="nav-btn">Tasks</a>
+        <a href="habits.html" class="nav-btn">Habits</a>
+        <a href="notes.html" class="nav-btn">Notes</a>
+        <a href="projects.html" class="nav-btn">Projects</a>
+        <a href="micro.html" class="nav-btn">Micro</a>
+      </div>
+    </nav>
 
     <main class="page-wrapper">
 
@@ -56,11 +57,15 @@
 
     </main>
 
-<script type="module" src="src/main.js"></script>
-<script>
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("/service-worker.js");
-  }
-</script>
-</body>
+    <!-- SERVICE WORKER -->
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("/service-worker.js");
+      }
+    </script>
+
+    <!-- MAIN JAVASCRIPT -->
+    <script type="module" src="/src/main.js"></script>
+
+  </body>
 </html>

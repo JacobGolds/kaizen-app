@@ -11,20 +11,20 @@
   <body class="skip-splash">
     <!-- SPLASH SCREEN -->
     <div id="splashScreen" class="splash">
-      <img src="icon.png" class="splash-logo" />
+      <img src="/kaizen-app/icon.png" class="splash-logo" />
     </div>
 
     <!-- NAVBAR -->
     <nav class="navbar">
-  <div class="nav-buttons">
-    <a href="index.html" class="nav-btn">Home</a>
-    <a href="tasks.html" class="nav-btn">Tasks</a>
-    <a href="habits.html" class="nav-btn">Habits</a>
-    <a href="notes.html" class="nav-btn">Notes</a>
-    <a href="projects.html" class="nav-btn">Projects</a>
-    <a href="micro.html" class="nav-btn">Micro</a>
-  </div>
-</nav>
+      <div class="nav-buttons">
+        <a href="index.html" class="nav-btn">Home</a>
+        <a href="tasks.html" class="nav-btn">Tasks</a>
+        <a href="habits.html" class="nav-btn">Habits</a>
+        <a href="notes.html" class="nav-btn">Notes</a>
+        <a href="projects.html" class="nav-btn">Projects</a>
+        <a href="micro.html" class="nav-btn">Micro</a>
+      </div>
+    </nav>
 
     <main class="page-wrapper">
 
@@ -49,7 +49,7 @@
       <!-- DAILY HIGHLIGHT -->
       <section class="card">
         <h2>Daily Highlight</h2>
-        <input id="highlightInput" type="text" placeholder="What Mattered today?" />
+        <input id="highlightInput" type="text" placeholder="What mattered today?" />
         <p id="highlightDisplay" class="highlight-display"></p>
       </section>
 
@@ -92,3 +92,25 @@
         </div>
 
         <div class="collapse-section advanced-only">
+          <div class="collapse-header">
+            <span>Projects (<span id="activeProjectsCount">0</span>)</span>
+            <span class="arrow">▼</span>
+          </div>
+          <div class="collapse-content" id="activeProjectsList"></div>
+        </div>
+
+        <div class="collapse-section advanced-only">
+          <div class="collapse-header">
+            <span>Time Estimates (<span id="activeTimeCount">0</span>)</span>
+            <span class="arrow">▼</span>
+          </div>
+          <div class="collapse-content" id="activeTimeList"></div>
+        </div>
+
+      </section>
+    </main>
+
+    <!-- LOAD JAVASCRIPT -->
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
