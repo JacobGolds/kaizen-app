@@ -9,6 +9,9 @@
   </head>
 
   <body>
+    <div id="splashScreen" class="splash">
+  <img src="icon.png" class="splash-logo" />
+</div>
     <!-- NAVBAR -->
     <nav class="navbar">
       <div class="nav-buttons">
@@ -110,6 +113,12 @@
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("/service-worker.js");
   }
+</script>
+<script>
+  setTimeout(() => {
+    const splash = document.getElementById("splashScreen");
+    if (splash) splash.remove();
+  }, 2000);
 </script>
   </body>
 </html>
