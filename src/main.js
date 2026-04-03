@@ -447,3 +447,11 @@ function renderWeeklyReport() {
   weeklyAccuracy.textContent = accuracy + "%";
   weeklyProjects.textContent = projectProgress + "%";
 }
+document.addEventListener("DOMContentLoaded", () => {
+  if (taskList) renderTasks();
+  if (habitList) renderHabits();
+  if (projectList) renderProjects();
+  if (microList) renderMicro();
+  if (highlightDisplay) renderHighlight();
+  renderDashboard();
+});
