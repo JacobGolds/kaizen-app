@@ -1,3 +1,8 @@
+// Show splash only on first launch
+if (!localStorage.getItem("kaizenHasLaunched")) {
+    localStorage.setItem("kaizenHasLaunched", "true");
+    document.body.classList.remove("skip-splash"); // allow splash to show
+}
 /* ============================================================
    LOCAL STORAGE HELPERS
 ============================================================ */

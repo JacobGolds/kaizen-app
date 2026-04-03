@@ -8,21 +8,21 @@
     <link rel="stylesheet" href="style.css" />
   </head>
 
-  <body>
+  <body class="skip-splash">
     <div id="splashScreen" class="splash">
   <img src="icon.png" class="splash-logo" />
 </div>
     <!-- NAVBAR -->
     <nav class="navbar">
-      <div class="nav-buttons">
-        <a href="index.html" class="nav-btn">Home</a>
-        <a href="tasks.html" class="nav-btn">Tasks</a>
-        <a href="habits.html" class="nav-btn">Habits</a>
-        <a href="notes.html" class="nav-btn">Notes</a>
-        <a href="projects.html" class="nav-btn">Projects</a>
-        <a href="micro.html" class="nav-btn">Micro</a>
-      </div>
-    </nav>
+  <div class="nav-buttons">
+    <a href="index.html" class="nav-btn">Home</a>
+    <a href="tasks.html" class="nav-btn">Tasks</a>
+    <a href="habits.html" class="nav-btn">Habits</a>
+    <a href="notes.html" class="nav-btn">Notes</a>
+    <a href="projects.html" class="nav-btn">Projects</a>
+    <a href="micro.html" class="nav-btn">Micro</a>
+  </div>
+</nav>
 
     <main class="page-wrapper">
 
@@ -62,12 +62,6 @@
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("/service-worker.js");
   }
-</script>
-<script>
-  setTimeout(() => {
-    const splash = document.getElementById("splashScreen");
-    if (splash) splash.remove();
-  }, 2000);
 </script>
   </body>
 </html>

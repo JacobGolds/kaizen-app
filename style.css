@@ -78,6 +78,7 @@ body::after {
   font-size: 1rem;
   font-weight: 600;
   transition: 0.25s ease;
+  white-space: nowrap;
 }
 
 .nav-btn[href*="index.html"]:hover { background: #8b5cf6; border-color: #8b5cf6; color: white; }
@@ -254,6 +255,7 @@ body.dark .collapse-content {
 .mode-simple .advanced-only {
   display: none;
 }
+
 .delete-btn {
   background: transparent;
   border: none;
@@ -266,6 +268,7 @@ body.dark .collapse-content {
 .delete-btn:hover {
   color: #b91c1c;
 }
+
 /* Fix text wrapping inside cards and headers */
 .page-header p,
 .card p,
@@ -280,6 +283,7 @@ body.dark .collapse-content {
 input::placeholder {
   white-space: normal;
 }
+
 /* Allow wrapping inside flex containers */
 .page-header,
 .top-controls,
@@ -287,7 +291,11 @@ input::placeholder {
 .card {
   flex-wrap: wrap;
 }
-/* MOBILE FIXES */
+
+/* -------------------------------------------------- */
+/* MOBILE FIXES                                        */
+/* -------------------------------------------------- */
+
 @media (max-width: 600px) {
 
   .page-wrapper {
@@ -325,8 +333,30 @@ input::placeholder {
     gap: 8px;
   }
 }
+/* MOBILE: Make navbar scroll horizontally */
+@media (max-width: 600px) {
+  .nav-buttons {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 6px;
+
+    /* Smooth scrolling */
+    scroll-behavior: smooth;
+
+    /* Hide ugly scrollbar on mobile */
+    -ms-overflow-style: none;  /* IE/Edge */
+    scrollbar-width: none;     /* Firefox */
+  }
+
+  .nav-buttons::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+  }
+}
+
 /* -------------------------------------------------- */
-/* PWA LAUNCH ANIMATION (Splash Screen)               */
+/* PWA SPLASH SCREEN (FINAL VERSION)                   */
 /* -------------------------------------------------- */
 
 .splash {
@@ -356,4 +386,25 @@ input::placeholder {
 @keyframes splashFade {
   0% { opacity: 1; }
   100% { opacity: 0; visibility: hidden; }
+}
+
+/* Hide splash instantly when skip-splash is active */
+body.skip-splash .splash {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+/* Fully remove splash when skip-splash is active */
+.skip-splash .splash {
+    display: none !important;
+}
+/* Reorder mode visual */
+.reorder-mode .nav-btn {
+  opacity: 0.8;
+  cursor: grab;
+}
+
+.reorder-mode .nav-btn:active {
+  cursor: grabbing;
 }
