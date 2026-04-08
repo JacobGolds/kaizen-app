@@ -1,8 +1,9 @@
 // Show splash only on first launch
 if (!localStorage.getItem("kaizenHasLaunched")) {
-    localStorage.setItem("kaizenHasLaunched", "true");
-    document.body.classList.remove("skip-splash"); // allow splash to show
+  localStorage.setItem("kaizenHasLaunched", "true");
+  document.body.classList.remove("skip-splash"); // allow splash to show
 }
+
 /* ============================================================
    LOCAL STORAGE HELPERS
 ============================================================ */
@@ -59,12 +60,12 @@ const darkModeBtn = document.getElementById("darkModeBtn");
 function applyMode() {
   if (simpleMode) {
     document.body.classList.add("mode-simple");
-    simpleModeBtn.classList.add("active");
-    advancedModeBtn.classList.remove("active");
+    if (simpleModeBtn) simpleModeBtn.classList.add("active");
+    if (advancedModeBtn) advancedModeBtn.classList.remove("active");
   } else {
     document.body.classList.remove("mode-simple");
-    advancedModeBtn.classList.add("active");
-    simpleModeBtn.classList.remove("active");
+    if (advancedModeBtn) advancedModeBtn.classList.add("active");
+    if (simpleModeBtn) simpleModeBtn.classList.remove("active");
   }
 }
 
@@ -127,7 +128,22 @@ if (highlightInput) {
 function renderHighlight() {
   if (highlightDisplay) {
     highlightDisplay.textContent = highlight || "No highlight set.";
+
+    const deleteBtn = document.getElementById("deleteHighlightBtn");
+    if (deleteBtn) {
+      deleteBtn.style.display = highlight ? "inline-block" : "none";
+    }
   }
+}
+
+// DELETE HIGHLIGHT BUTTON
+const deleteHighlightBtn = document.getElementById("deleteHighlightBtn");
+if (deleteHighlightBtn) {
+  deleteHighlightBtn.addEventListener("click", () => {
+    highlight = "";
+    save("highlight", "");
+    renderHighlight();
+  });
 }
 
 renderHighlight();
@@ -370,6 +386,7 @@ function renderMicro() {
 ============================================================ */
 document.querySelectorAll(".collapse-section").forEach(section => {
   const header = section.querySelector(".collapse-header");
+  if (!header) return;
   header.addEventListener("click", () => {
     section.classList.toggle("open");
   });
@@ -398,19 +415,30 @@ function renderDashboard() {
   if (activeTimeCount) activeTimeCount.textContent = tasks.filter(t => t.estimate > 0).length;
 
   if (activeTasksList) {
-    activeTasksList.innerHTML = tasks.filter(t => !t.completed).map(t => `<div class="collapse-item">${t.text}</div>`).join("");
+    activeTasksList.innerHTML = tasks
+      .filter(t => !t.completed)
+      .map(t => `<div class="collapse-item">${t.text}</div>`)
+      .join("");
   }
 
   if (activeHabitsList) {
-    activeHabitsList.innerHTML = habits.filter(h => !h.completed).map(h => `<div class="collapse-item">${h.text}</div>`).join("");
+    activeHabitsList.innerHTML = habits
+      .filter(h => !h.completed)
+      .map(h => `<div class="collapse-item">${h.text}</div>`)
+      .join("");
   }
 
   if (activeMicroList) {
-    activeMicroList.innerHTML = micro.filter(m => !m.completed).map(m => `<div class="collapse-item">${m.text}</div>`).join("");
+    activeMicroList.innerHTML = micro
+      .filter(m => !m.completed)
+      .map(m => `<div class="collapse-item">${m.text}</div>`)
+      .join("");
   }
 
   if (activeProjectsList) {
-    activeProjectsList.innerHTML = projects.map(p => `<div class="collapse-item">${p.name}</div>`).join("");
+    activeProjectsList.innerHTML = projects
+      .map(p => `<div class="collapse-item">${p.name}</div>`)
+      .join("");
   }
 
   if (activeTimeList) {
@@ -430,33 +458,18 @@ renderDashboard();
 ============================================================ */
 function renderWeeklyReport() {
   const weeklyTasks = document.getElementById("weeklyTasks");
-  const weeklyHabits = document.getElementById("weeklyHabits");
-  const weeklyMicro = document.getElementById("weeklyMicro");
-  const weeklyAccuracy = document.getElementById("weeklyAccuracy");
-  const weeklyProjects = document.getElementById("weeklyProjects");
-
-  if (!weeklyTasks) return;
-
-  const completedTasks = tasks.filter(t => t.completed).length;
-  const completedHabits = habits.filter(h => h.completed).length;
-  const completedMicro = micro.filter(m => m.completed).length;
-
-  const estimates = tasks.filter(t => t.estimate > 0);
-  const accuracy = estimates.length ? Math.round((completedTasks / estimates.length) * 100) : 0;
-
-  const projectProgress = projects.length ? Math.round((completedTasks / projects.length) * 100) : 0;
-
-  weeklyTasks.textContent = completedTasks;
-  weeklyHabits.textContent = completedHabits;
-  weeklyMicro.textContent = completedMicro;
-  weeklyAccuracy.textContent = accuracy + "%";
-  weeklyProjects.textContent = projectProgress + "%";
+  const weeklyHabits = document.get
 }
 document.addEventListener("DOMContentLoaded", () => {
-  if (taskList) renderTasks();
-  if (habitList) renderHabits();
-  if (projectList) renderProjects();
-  if (microList) renderMicro();
-  if (highlightDisplay) renderHighlight();
-  renderDashboard();
+  const input = document.getElementById("itemInput");
+
+  if (!input) return; // if this page doesn't have an input, skip it
+
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();   // ← THIS makes Enter work on phones
+      addItem();            // ← this runs your add function
+      input.value = "";     // ← clears the box
+    }
+  });
 });
