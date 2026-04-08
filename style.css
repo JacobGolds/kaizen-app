@@ -78,7 +78,6 @@ body::after {
   font-size: 1rem;
   font-weight: 600;
   transition: 0.25s ease;
-  white-space: nowrap;
 }
 
 .nav-btn[href*="index.html"]:hover { background: #8b5cf6; border-color: #8b5cf6; color: white; }
