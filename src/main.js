@@ -460,16 +460,11 @@ function renderWeeklyReport() {
   const weeklyTasks = document.getElementById("weeklyTasks");
   const weeklyHabits = document.get
 }
-document.addEventListener("DOMContentLoaded", () => {
-  const input = document.getElementById("itemInput");
-
-  if (!input) return; // if this page doesn't have an input, skip it
-
-  input.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();   // ← THIS makes Enter work on phones
-      addItem();            // ← this runs your add function
-      input.value = "";     // ← clears the box
-    }
-  });
-});
+/* ============================================================
+   SERVICE WORKER REGISTRATION
+============================================================ */
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js")
+    .then(() => console.log("Service Worker registered"))
+    .catch(err => console.error("SW registration failed:", err));
+}
