@@ -468,3 +468,10 @@ if ("serviceWorker" in navigator) {
     .then(() => console.log("Service Worker registered"))
     .catch(err => console.error("SW registration failed:", err));
 }
+// INITIAL RENDER FOR ALL PAGES
+renderTasks();
+renderHabits();
+renderProjects();
+renderMicro();
+renderDashboard();
+renderHighlight();
