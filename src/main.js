@@ -19,12 +19,14 @@ function load(key, fallback) {
 /* ============================================================
    LOAD ALL DATA
 ============================================================ */
+let hideCompleted = load("hideCompleted", false);
 let tasks = load("tasks", []);
 let habits = load("habits", []);
 let notes = load("notes", "");
 let projects = load("projects", []);
 let micro = load("micro", []);
-let highlight = load("highlight", "");
+let highlightRaw = load("highlight", []);
+let highlight = Array.isArray(highlightRaw) ? highlightRaw : (highlightRaw ? [highlightRaw] : []);
 let simpleMode = load("simpleMode", true);
 let darkMode = load("darkMode", false);
 
@@ -53,6 +55,10 @@ const highlightDisplay = document.getElementById("highlightDisplay");
 const simpleModeBtn = document.getElementById("simpleModeBtn");
 const advancedModeBtn = document.getElementById("advancedModeBtn");
 const darkModeBtn = document.getElementById("darkModeBtn");
+
+if (hideCompleted) {
+  document.body.classList.add("hide-completed");
+}
 
 /* ============================================================
    SIMPLE / ADVANCED MODE
@@ -114,35 +120,45 @@ applyDarkMode();
    DAILY HIGHLIGHT
 ============================================================ */
 if (highlightInput) {
-  highlightInput.value = highlight;
+  highlightInput.value = ""; // start empty
 
   highlightInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
-      highlight = highlightInput.value.trim();
+      const text = highlightInput.value.trim();
+      if (!text) return;
+
+      highlight.push(text);
       save("highlight", highlight);
+      highlightInput.value = "";
       renderHighlight();
     }
   });
 }
 
 function renderHighlight() {
-  if (highlightDisplay) {
-    highlightDisplay.textContent = highlight || "No highlight set.";
+  if (!highlightDisplay) return;
 
-    const deleteBtn = document.getElementById("deleteHighlightBtn");
-    if (deleteBtn) {
-      deleteBtn.style.display = highlight ? "inline-block" : "none";
-    }
+  if (highlight.length === 0) {
+    highlightDisplay.innerHTML = "<p>No highlights set.</p>";
+    return;
   }
-}
 
-// DELETE HIGHLIGHT BUTTON
-const deleteHighlightBtn = document.getElementById("deleteHighlightBtn");
-if (deleteHighlightBtn) {
-  deleteHighlightBtn.addEventListener("click", () => {
-    highlight = "";
-    save("highlight", "");
-    renderHighlight();
+  highlightDisplay.innerHTML = highlight
+    .map((h, i) => `
+      <div class="highlight-row">
+        <span>${h}</span>
+        <button class="delete-btn" data-index="${i}">✖</button>
+      </div>
+    `)
+    .join("");
+
+  highlightDisplay.querySelectorAll(".delete-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const index = btn.getAttribute("data-index");
+      highlight.splice(index, 1);
+      save("highlight", highlight);
+      renderHighlight();
+    });
   });
 }
 
@@ -199,7 +215,7 @@ function renderTasks() {
 
   tasks.forEach((task, index) => {
     const li = document.createElement("li");
-    li.className = "task-item";
+    li.className = "task-item" + (task.completed ? " completed" : "");
 
     li.innerHTML = `
       <input type="checkbox" ${task.completed ? "checked" : ""} />
@@ -253,7 +269,7 @@ function renderHabits() {
 
   habits.forEach((habit, index) => {
     const div = document.createElement("div");
-    div.className = "habit-item";
+    div.className = "habit-item" + (habit.completed ? " completed" : "");
 
     div.innerHTML = `
       <input type="checkbox" ${habit.completed ? "checked" : ""} />
@@ -354,6 +370,7 @@ function renderMicro() {
 
   micro.forEach((item, index) => {
     const li = document.createElement("li");
+    li.className = item.completed ? "completed" : "";
 
     li.innerHTML = `
       <input type="checkbox" ${item.completed ? "checked" : ""} />
@@ -475,3 +492,23 @@ renderProjects();
 renderMicro();
 renderDashboard();
 renderHighlight();
+document.addEventListener("DOMContentLoaded", () => {
+    const hideBtn = document.getElementById("hideCompletedBtn");
+    if (!hideBtn) return;
+
+    // Set initial button text
+    hideBtn.textContent = hideCompleted ? "Show ✓" : "Hide ✓";
+
+    hideBtn.addEventListener("click", () => {
+        hideCompleted = !hideCompleted;
+        save("hideCompleted", hideCompleted);
+
+        if (hideCompleted) {
+            document.body.classList.add("hide-completed");
+            hideBtn.textContent = "Show ✓";
+        } else {
+            document.body.classList.remove("hide-completed");
+            hideBtn.textContent = "Hide ✓";
+        }
+    });
+});
